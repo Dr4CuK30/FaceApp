@@ -1,0 +1,10 @@
+<video
+  style="position: absolute"
+  #streamVideo
+  *ngIf="stream"
+  [srcObject]="stream"
+  [height]="height"
+  [width]="width"
+  autoplay
+  (play)="detect()"
+></video>
