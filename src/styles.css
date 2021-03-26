@@ -1,3 +1,33 @@
 canvas {
   position: absolute;
 }
+body {
+  background: #076585; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fff,
+    #076585
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fff,
+    #076585
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.progress {
+  height: 30px;
+}
+h2 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+.barra {
+  margin-top: 40px;
+  margin-right: 30px;
+}
+video,
+canvas {
+  margin: 6%;
+}

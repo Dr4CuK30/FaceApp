@@ -1,10 +1,12 @@
 <video
+  class="img-thumbnail"
   style="position: absolute"
+  (loadedmetadata)="x()"
   #streamVideo
   *ngIf="stream"
   [srcObject]="stream"
-  [height]="height"
-  [width]="width"
+  height="600px"
+  width="800px"
   autoplay
   (play)="detect()"
 ></video>

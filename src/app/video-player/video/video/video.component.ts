@@ -1,13 +1,11 @@
+import { FacedataService } from '../../services/facedata.service';
 import {
   Component,
   ElementRef,
-  Input,
   OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import * as faceapi from 'face-api.js';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-video',
@@ -18,24 +16,19 @@ export class VideoComponent implements OnInit {
   @ViewChild('streamVideo') streamVideo!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
   modelsCargados: boolean = false;
-  width = 1000;
-  height = 800;
   stream: any;
-  constructor(private renderer2: Renderer2, private element: ElementRef) {
-    Promise.all([
-      faceapi.nets.faceExpressionNet.loadFromUri('../../assets/models'),
-      faceapi.nets.faceLandmark68Net.loadFromUri('../../assets/models'),
-      faceapi.nets.tinyFaceDetector.loadFromUri('../../assets/models'),
-      faceapi.nets.faceExpressionNet.loadFromUri('../../assets/models'),
-    ])
-      .then(() => {
-        this.modelsCargados = true;
-      })
-      .catch(() => console.log('Huvo un error al cargar los modelos'));
+  faceapi: any;
+  constructor(
+    private faceapiService: FacedataService,
+    private renderer2: Renderer2,
+    private element: ElementRef
+  ) {
+    faceapiService.cargarModelos();
   }
 
   ngOnInit(): void {
     this.checkMediaDevice();
+    this.faceapi = this.faceapiService.faceapi;
   }
 
   async checkMediaDevice() {
@@ -48,36 +41,38 @@ export class VideoComponent implements OnInit {
       return;
     }
   }
+
   detect() {
     console.log(this.streamVideo);
-    const canvas = faceapi.createCanvasFromMedia(
+    const canvas = this.faceapi.createCanvasFromMedia(
       this.streamVideo.nativeElement
     );
-    const displaySize = { width: this.height, height: this.height };
-    faceapi.matchDimensions(canvas, displaySize);
+    const displaySize = { width: 800, height: 600 };
+    this.faceapi.matchDimensions(canvas, displaySize);
     this.renderer2.setProperty(canvas, 'id', 'new-canvas');
-    this.renderer2.setStyle(canvas, 'width', '1000');
-    this.renderer2.setStyle(canvas, 'height', '1000');
+    this.renderer2.setStyle(canvas, 'width', `${canvas.width}`);
+    this.renderer2.setStyle(canvas, 'height', `${canvas.height}`);
     this.renderer2.appendChild(this.element.nativeElement, canvas);
     setInterval(async () => {
-      const detections = await faceapi
-        .detectAllFaces(
-          this.streamVideo.nativeElement,
-          new faceapi.TinyFaceDetectorOptions()
-        )
-        .withFaceLandmarks()
-
-        .withFaceExpressions();
+      const detections = await this.faceapiService.getDetections(
+        this.streamVideo.nativeElement
+      );
 
       canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
-      const resizedDetections = faceapi.resizeResults(detections, {
-        width: 1000,
-        height: 800,
-      });
-      faceapi.draw.drawDetections(canvas, resizedDetections);
-      faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-      console.log(resizedDetections);
+      const resizedDetections = this.faceapi.resizeResults(
+        detections,
+        displaySize
+      );
+      this.faceapi.draw.drawDetections(canvas, resizedDetections);
+      this.faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+      this.faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     }, 100);
+  }
+  x() {
+    const localwidth = this.streamVideo.nativeElement.width;
+    const localheight = this.streamVideo.nativeElement.height;
+    console.log(localwidth);
+    console.log(localheight);
+    console.log('xd');
   }
 }
