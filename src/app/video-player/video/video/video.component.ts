@@ -43,11 +43,10 @@ export class VideoComponent implements OnInit {
   }
 
   detect() {
-    console.log(this.streamVideo);
     const canvas = this.faceapi.createCanvasFromMedia(
       this.streamVideo.nativeElement
     );
-    const displaySize = { width: 800, height: 600 };
+    const displaySize = { width: 960, height: 720 };
     this.faceapi.matchDimensions(canvas, displaySize);
     this.renderer2.setProperty(canvas, 'id', 'new-canvas');
     this.renderer2.setStyle(canvas, 'width', `${canvas.width}`);
@@ -63,16 +62,7 @@ export class VideoComponent implements OnInit {
         detections,
         displaySize
       );
-      this.faceapi.draw.drawDetections(canvas, resizedDetections);
-      this.faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
       this.faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     }, 100);
-  }
-  x() {
-    const localwidth = this.streamVideo.nativeElement.width;
-    const localheight = this.streamVideo.nativeElement.height;
-    console.log(localwidth);
-    console.log(localheight);
-    console.log('xd');
   }
 }

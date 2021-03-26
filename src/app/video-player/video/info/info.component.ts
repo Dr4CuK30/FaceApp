@@ -12,11 +12,12 @@ export class InfoComponent implements OnInit {
   surprised_percent = `0%`;
   sad_percent = `0%`;
   happy_percent = `0%`;
+  neutral_percent = `0%`;
 
   constructor(private facedataService: FacedataService) {
     setInterval(async () => {
       const detections = await this.facedataService.detections;
-      if (detections.length > 0) {
+      if (detections && detections.length > 0) {
         this.actualDetections = detections;
         this.angry_percent = `${
           this.actualDetections[0].expressions.angry * 100
@@ -27,6 +28,9 @@ export class InfoComponent implements OnInit {
         }%`;
         this.happy_percent = `${
           this.actualDetections[0].expressions.happy * 100
+        }%`;
+        this.neutral_percent = `${
+          this.actualDetections[0].expressions.neutral * 100
         }%`;
       }
     }, 100);
