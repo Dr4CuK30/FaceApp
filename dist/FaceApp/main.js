@@ -211,7 +211,7 @@ VideoComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.streamVideo = _t.first);
     } }, hostBindings: function VideoComponent_HostBindings(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("resize", function VideoComponent_resize_HostBindingHandler($event) { return ctx.onResize($event); }, false, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresolveWindow"]);
-    } }, decls: 1, vars: 1, consts: [["class", "img-thumbnail", "style", "position: absolute", "width", "85%", "autoplay", "", 3, "srcObject", "play", 4, "ngIf"], ["width", "85%", "autoplay", "", 1, "img-thumbnail", 2, "position", "absolute", 3, "srcObject", "play"], ["streamVideo", ""]], template: function VideoComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 1, vars: 1, consts: [["class", "img-thumbnail", "style", "position: absolute", "width", "85%", "autoplay", "", "playsinline", "", 3, "srcObject", "play", 4, "ngIf"], ["width", "85%", "autoplay", "", "playsinline", "", 1, "img-thumbnail", 2, "position", "absolute", 3, "srcObject", "play"], ["streamVideo", ""]], template: function VideoComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](0, VideoComponent_video_0_Template, 2, 1, "video", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.stream);
