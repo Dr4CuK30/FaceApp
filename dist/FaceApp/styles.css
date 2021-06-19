@@ -1,0 +1,39 @@
+canvas {
+  position: absolute;
+}
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #caf0f8;
+}
+.progress {
+  height: 4vh;
+}
+h2 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+.barra {
+  margin-bottom: 5vh;
+}
+video,
+canvas {
+  margin: 6%;
+}
+.medidores {
+  height: 100%;
+  background-color: #00b4d8;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-bottom: 50px;
+  padding-top: 5vh;
+}
+.medTittle {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+/*# sourceMappingURL=styles.css.map*/
