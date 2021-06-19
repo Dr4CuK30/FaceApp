@@ -1,11 +1,13 @@
-<video
-  class="img-thumbnail"
-  style="position: absolute"
-  #streamVideo
-  *ngIf="stream"
-  [srcObject]="stream"
-  width="85%"
-  autoplay
-  playsinline
-  (play)="detect()"
-></video>
+<div #caja [ngStyle]="cajaStyle">
+  <video
+    class="img-thumbnail"
+    style="position: absolute"
+    #streamVideo
+    *ngIf="stream"
+    [srcObject]="stream"
+    width="85%"
+    autoplay
+    playsinline
+    (play)="detect()"
+  ></video>
+</div>

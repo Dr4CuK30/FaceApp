@@ -20,6 +20,10 @@ h2 {
 video,
 canvas {
   margin: 6%;
+  position: absolute;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  -moz-transform: rotateY(180deg); /* Firefox */
 }
 .medidores {
   height: 100%;
