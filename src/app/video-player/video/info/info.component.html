@@ -1,80 +1,70 @@
-<h1
-  style="
-    color: white;
-    text-align: center;
-    margin-right: 30px;
-    font-weight: bold;
-    -webkit-box-shadow: 0px 0px 300px 27px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 300px 27px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 300px 27px rgba(0, 0, 0, 0.75);
-    margin-bottom: 80px;
-  "
->
-  MOOD
-</h1>
-<div class="barra">
-  <h2>Neutral</h2>
-  <div class="progress">
-    <div
-      class="progress-bar"
-      role="progressbar"
-      [ngStyle]="{ width: neutral_percent }"
-      style="width: 25%"
-      aria-valuenow="25"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
+<div class="row justify-content-center">
+  <h1 class="fs-2 medTittle col-12">MOOD</h1>
+  <hr />
+  <div class="barra col-md-12 col-6">
+    <h2 class="fs-4">Neutral</h2>
+    <div class="progress">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [ngStyle]="{ width: neutral_percent }"
+        style="width: 25%"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
   </div>
-</div>
-<div class="barra">
-  <h2>Happy</h2>
-  <div class="progress">
-    <div
-      class="progress-bar bg-success"
-      role="progressbar"
-      [ngStyle]="{ width: happy_percent }"
-      aria-valuenow="25"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
+  <div class="barra col-md-12 col-6">
+    <h2 class="fs-4">Happy</h2>
+    <div class="progress">
+      <div
+        class="progress-bar bg-success"
+        role="progressbar"
+        [ngStyle]="{ width: happy_percent }"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
   </div>
-</div>
-<div class="barra">
-  <h2>Surprised</h2>
-  <div class="progress">
-    <div
-      class="progress-bar bg-info"
-      role="progressbar"
-      [ngStyle]="{ width: surprised_percent }"
-      aria-valuenow="50"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
+  <div class="barra col-md-12 col-6">
+    <h2 class="fs-4">Surprised</h2>
+    <div class="progress">
+      <div
+        class="progress-bar bg-info"
+        role="progressbar"
+        [ngStyle]="{ width: surprised_percent }"
+        aria-valuenow="50"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
   </div>
-</div>
-<div class="barra">
-  <h2>Sad</h2>
-  <div class="progress">
-    <div
-      class="progress-bar bg-warning"
-      role="progressbar"
-      [ngStyle]="{ width: sad_percent }"
-      aria-valuenow="75"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
+  <div class="barra col-md-12 col-6">
+    <h2 class="fs-4">Sad</h2>
+    <div class="progress">
+      <div
+        class="progress-bar bg-warning"
+        role="progressbar"
+        [ngStyle]="{ width: sad_percent }"
+        aria-valuenow="75"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
   </div>
-</div>
-<div class="barra">
-  <h2>Angry</h2>
-  <div class="progress">
-    <div
-      class="progress-bar bg-danger"
-      role="progressbar"
-      [ngStyle]="{ width: angry_percent }"
-      aria-valuenow="10"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    ></div>
+  <div class="barra col-md-12 col-6">
+    <h2 class="fs-4">Angry</h2>
+    <div class="progress">
+      <div
+        class="progress-bar bg-danger"
+        role="progressbar"
+        [ngStyle]="{ width: angry_percent }"
+        aria-valuenow="10"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
   </div>
 </div>

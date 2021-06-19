@@ -2,6 +2,7 @@ import { FacedataService } from '../../services/facedata.service';
 import {
   Component,
   ElementRef,
+  HostListener,
   OnInit,
   Renderer2,
   ViewChild,
@@ -14,10 +15,12 @@ import {
 })
 export class VideoComponent implements OnInit {
   @ViewChild('streamVideo') streamVideo!: ElementRef;
-  @ViewChild('canvas') canvas!: ElementRef;
+
   modelsCargados: boolean = false;
   stream: any;
   faceapi: any;
+  canvas: any;
+  displaySize: any;
   constructor(
     private faceapiService: FacedataService,
     private renderer2: Renderer2,
@@ -43,26 +46,36 @@ export class VideoComponent implements OnInit {
   }
 
   detect() {
-    const canvas = this.faceapi.createCanvasFromMedia(
+    this.canvas = this.faceapi.createCanvasFromMedia(
       this.streamVideo.nativeElement
     );
-    const displaySize = { width: 960, height: 720 };
-    this.faceapi.matchDimensions(canvas, displaySize);
-    this.renderer2.setProperty(canvas, 'id', 'new-canvas');
-    this.renderer2.setStyle(canvas, 'width', `${canvas.width}`);
-    this.renderer2.setStyle(canvas, 'height', `${canvas.height}`);
-    this.renderer2.appendChild(this.element.nativeElement, canvas);
+    this.displaySize = {
+      width: this.streamVideo.nativeElement.offsetWidth,
+      height: this.streamVideo.nativeElement.offsetHeight,
+    };
+    this.faceapi.matchDimensions(this.canvas, this.displaySize);
+    this.renderer2.setProperty(this.canvas, 'id', 'new-canvas');
+    this.renderer2.setStyle(this.canvas, 'width', `${this.canvas.width}`);
+    this.renderer2.setStyle(this.canvas, 'height', `${this.canvas.height}`);
+    this.renderer2.appendChild(this.element.nativeElement, this.canvas);
     setInterval(async () => {
       const detections = await this.faceapiService.getDetections(
         this.streamVideo.nativeElement
       );
-
-      canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
+      this.canvas
+        .getContext('2d')
+        ?.clearRect(0, 0, this.canvas.width, this.canvas.height);
       const resizedDetections = this.faceapi.resizeResults(
         detections,
-        displaySize
+        this.displaySize
       );
-      this.faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    }, 100);
+      this.faceapi.draw.drawFaceLandmarks(this.canvas, resizedDetections);
+    }, 250);
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.canvas.width = this.streamVideo.nativeElement.offsetWidth;
+    this.canvas.height = this.streamVideo.nativeElement.offsetHeight;
+    this.displaySize = { width: this.canvas.width, height: this.canvas.height };
   }
 }
