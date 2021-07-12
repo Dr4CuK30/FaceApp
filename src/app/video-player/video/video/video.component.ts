@@ -80,6 +80,7 @@ export class VideoComponent implements OnInit {
     this.canvas.width = this.streamVideo.nativeElement.offsetWidth;
     this.canvas.height = this.streamVideo.nativeElement.offsetHeight;
     this.displaySize = { width: this.canvas.width, height: this.canvas.height };
-    this.cajaStyle['height.px'] = this.canvas.width;
+    this.cajaStyle['height.px'] =
+      this.streamVideo.nativeElement.offsetHeight + 50;
   }
 }
